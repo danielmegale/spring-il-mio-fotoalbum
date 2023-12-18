@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<h1>Foto:</h1>
+
+	<form>
+		<label for="search">SEARCH</label>
+		<input id="search" type="text" name="q" th:value="${q}">
+		<input type="submit" value="SEARCH">
+	</form>
+
+	<a th:href="@{/photos/create}">Crea</a>
+	<a th:href="@{/categories}">Categorie</ath>
+
+		<ul class="list-group">
+			<li th:each="photo : ${photos}" th:object="${photo}" class="">
+					<a th:href="@{/photos/{id}(id=${photo.id})}">
+						[[${photo.titolo}]]<br>
+						[[${photo.descrizione}]]
+						<div th:if="${photo.url != ''}">
+							<img th:src="${photo.url}">
+						</div>
+					</a>
+					<div th:unless="${photo.url != ''}">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png">
+					</div>
+					<div>
+						<h4>Categorie</h4>
+						<ul>
+							<li th:each="category : *{categories}" th:object="${category}">
+								[[*{nome}]]
+							</li>
+						</ul>
+					</div>
+					<a th:href="@{/photos/edit/{id}(id=${photo.id})}"><button>Modifica</button></a>
+					<form th:action="@{/photos/delete/{id}(id=${photo.id})}" method="POST"
+						style="display: inline-block;">
+						<input class="bg-danger" type="submit" value="Elimina">
+					</form>
+
+			</li>
+		</ul>
+</body>
+
+</html>

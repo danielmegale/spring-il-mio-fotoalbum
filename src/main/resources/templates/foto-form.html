@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<h1>Aggiungi Post</h1>
+	<form th:object="${foto}" method="POST">
+
+		<div>
+		<label for="titolo">Titolo</label>
+		<input type="text" id="titolo" th:field="*{titolo}">
+		<br>
+
+		<div th:if="${#fields.hasErrors('titolo')}">
+			<span th:each="err : ${#fields.errors('titolo')}" th:text="${err}"></span>
+		</div>
+		</div>
+
+		<label for="descrizione">Descrizione</label>
+		<input type="text" id="descrizione" th:field="*{descrizione}">
+		<br>
+
+		<div th:if="${#fields.hasErrors('descrizione')}">
+			<span th:each="err : ${#fields.errors('descrizione')}" th:text="${err}"></span>
+		</div>
+
+		<label for="url">Link Foto</label>
+		<input type="text" id="url" th:field="*{url}">
+		<br>
+
+		<div th:if="${#fields.hasErrors('url')}">
+			<span th:each="err : ${#fields.errors('url')}" th:text="${err}"></span>
+		</div>
+
+		<div class="form-check form-switch">
+			<label class="form-check-label" for="visibile">Visibile</label>
+			<input class="form-check-input" type="checkbox" id="visibile" th:field="*{visibile}">
+		</div>
+
+		<h4>Categorie:</h4>
+		<div th:each="category : ${categories}">
+			<input type="checkbox" th:id="${'category-' + category.id}" th:value="${category.id}"
+				   th:field="${foto.categories}" th:checked="${foto != null && foto.categories != null && foto.categories.contains(category)}">
+			<label th:for="${'category-' + category.id}" th:text="${category.nome}"></label>
+			<br>
+		</div>
+		
+
+		<input type="submit" value="STORE">
+	</form>
+</body>
+
+</html>

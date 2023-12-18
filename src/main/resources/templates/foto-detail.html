@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<h1 th:text="${foto.titolo}"></h1>
+	<p th:text="${foto.descrizione}"></p>
+	<img th:src="${foto.url}">
+	
+<!--		<li th:each="ingredient : *{ingredients}" th:object="${ingredient}"-->
+<!--		>-->
+<!--		[[*{nome}]]-->
+<!--		</li>-->
+<!--	</ul>-->
+<!--	<div sec:authorize="hasAuthority('ADMIN')">-->
+<!--	<a th:href="@{/pizzas/{id}/coupon (id=*{id})}">Nuova offerta</a>		-->
+<!--	</div>-->
+</body>
+
+</html>

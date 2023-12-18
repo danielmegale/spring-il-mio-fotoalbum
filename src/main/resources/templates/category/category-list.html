@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+	<title>Lista Ingredienti</title>
+</head>
+
+<body>
+	<h1>Lista Categorie</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Opzioni</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="category : ${categories}">
+				<td th:text="${category.id}" th:field="${category.id}"></td>
+				<td th:text="${category.nome}" th:field="${category.nome}"></td>
+				<td>
+					<a th:href="@{/categories/edit/{id}(id=${category.id})}"><button>Modifica</button></a>
+					<form th:action="@{/categories/delete/{id}(id=${category.id})}" method="POST"
+						style="display: inline-block;">
+						<input type="hidden" name="_method" value="DELETE">
+						<input class="bg-danger" type="submit" value="Elimina">
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/categories/create}" class="btn btn-success">Crea Nuova Categoria</a>
+	<a class="btn btn-primary" th:href="@{/}">Home</a>
+</body>
+
+</html>

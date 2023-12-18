@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+        <title>Lista Ingredienti</title>
+    </head>
+<body>
+
+	<div class="container">
+		<div class="title d-flex justify-content-center my-3">
+			<h1><i class="fa-solid fa-message"></i> Messaggi:</h1>
+		</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Messaggio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="message : ${list}" th:object="${message}">
+                    <td th:text="${message.id}" th:field="${message.id}"></td>
+                    <td th:text="${message.email}" th:field="${message.email}"></td>
+                    <td th:text="${message.message}" th:field="${message.message}"></td>
+                    <td>
+                        <form th:action="@{/messages/delete/{id}(id=${message.id})}" method="POST"
+                            style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input class="bg-danger" type="submit" value="Elimina">
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+		
+	</div>
+</body>
+</html>
